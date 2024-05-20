@@ -7,7 +7,7 @@ const Navbar = () => {
         <li><a>DASHBOARD</a></li>
         <NavLink to='/menu'><li><a>Our Menu</a></li></NavLink>
         <NavLink to='/order/drinks'><li><a>Order Food</a></li></NavLink>
-        <li><a>Sing Out</a></li>
+        <NavLink to='/login'><li><a>Login</a></li></NavLink>
         <img className="object-cover w-10 h-10 rounded-full" src={profile} />
     </>
     return (
