@@ -2,9 +2,11 @@ import loginImg from '../../assets/others/authentication1.png'
 import loginBg from '../../assets/others/authentication.png'
 
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Login = () => {
+    const { signInUser } = useContext(AuthContext)
     const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
 
@@ -18,7 +20,14 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        signInUser(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user)
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
 
@@ -26,9 +35,9 @@ const Login = () => {
 
     const handleValidateCaptcha = () => {
         const user_captcha_value = captchaRef.current.value;
-        if(validateCaptcha(user_captcha_value)){
+        if (validateCaptcha(user_captcha_value)) {
             setDisabled(false)
-        }else{
+        } else {
             setDisabled(true)
         }
     }
@@ -59,7 +68,7 @@ const Login = () => {
                                 <LoadCanvasTemplate />
 
                             </label>
-                            
+
                             <input ref={captchaRef} name='captcha' type="text" placeholder="enter captcha" className="input input-bordered" required />
                         </div>
                         <button onClick={handleValidateCaptcha} className="my-4 btn btn-outline btn-xs btn-success">Valid</button>
