@@ -30,9 +30,9 @@ const Register = () => {
 
     return (
         <>
-        <Helmet>
-            <title>Bistro Boss | Register</title>
-        </Helmet>
+            <Helmet>
+                <title>Bistro Boss | Register</title>
+            </Helmet>
             <div className={`hero min-h-screen bg-[url('${loginBg}')] h-64 w-full bg-cover bg-center`}>
                 <div className="hero-content flex space-x-[100px] justify-center">
 
