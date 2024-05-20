@@ -51,7 +51,7 @@ const Review = () => {
                             <p className='text-[#444] text-xl mb-2'>{item.details}</p>
                             <h1 className='text-[#CD9003] text-3xl'>{item.name}</h1>
                         </div>
-                    </SwiperSlide>)
+                    </SwiperSlide>) 
                 }
 
             </Swiper>
