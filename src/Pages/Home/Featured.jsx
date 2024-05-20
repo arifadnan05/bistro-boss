@@ -14,7 +14,7 @@ const Featured = () => {
                         <h3 className="uppercase text-2xl">where can i get some?</h3>
                         <p className="mb-5 leading-[30px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.</p>
                         <div className='ml-4'>
-                            <h3 className='uppercase text-white font-semibold underline cursor-pointer'>Read More</h3>
+                            <button className='uppercase text-white btn btn-outline border-0 border-b-2'>Read More</button>
                         </div>
                     </div>
                 </div>
