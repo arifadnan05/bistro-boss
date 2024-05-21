@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { Helmet } from 'react-helmet-async'
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateNameAndPhoto } = useContext(AuthContext)
 
     const {
         register,
@@ -18,6 +18,7 @@ const Register = () => {
 
         createUser(email, password)
             .then(result => {
+                updateNameAndPhoto(name)
                 const user = result.user
                 console.log(user)
             })

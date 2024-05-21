@@ -2,14 +2,18 @@ import loginImg from '../../assets/others/authentication1.png'
 import loginBg from '../../assets/others/authentication.png'
 
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { signInUser } = useContext(AuthContext)
-    const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true)
+    const navigate = useNavigate();
+    const location = useLocation();
+
+
 
     useEffect(() => {
         loadCaptchaEnginge(6)
@@ -23,19 +27,20 @@ const Login = () => {
         const password = form.password.value;
         signInUser(email, password)
             .then(result => {
+
                 const user = result.user;
-                alert('Login success')
+                console.log(user)
+                navigate(location?.state ? location.state : '/')
+
             })
+
             .catch(error => {
                 console.error(error)
             })
     }
 
-
-
-
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)) {
             setDisabled(false)
         } else {
@@ -45,9 +50,9 @@ const Login = () => {
 
     return (
         <>
-        <Helmet>
-            <title>Bistro Boss | Login</title>
-        </Helmet>
+            <Helmet>
+                <title>Bistro Boss | Login</title>
+            </Helmet>
             <div className={`hero min-h-screen bg-[url('${loginBg}')] h-64 w-full bg-cover bg-center`}>
                 <div className="hero-content flex space-x-[100px] justify-center">
                     <div className="w-[40%] text-center lg:text-left">
@@ -74,9 +79,8 @@ const Login = () => {
 
                                 </label>
 
-                                <input ref={captchaRef} name='captcha' type="text" placeholder="enter captcha" className="input input-bordered" required />
+                                <input onBlur={handleValidateCaptcha} name='captcha' type="text" placeholder="enter captcha" className="input input-bordered" required />
                             </div>
-                            <button onClick={handleValidateCaptcha} className="my-4 btn btn-outline btn-xs btn-success">Valid</button>
                             <div className="form-control mt-6">
                                 <button disabled={disabled} className="btn btn-primary">Login</button>
                             </div>
