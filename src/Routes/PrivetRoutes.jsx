@@ -11,7 +11,7 @@ const PrivetRoutes = ({children}) => {
     if(loading) {
       return <span className="loading loading-bars loading-lg"></span>
     }
-  return <Navigate to='/login' state={{form: location}} replace></Navigate>
+  return <Navigate state={location.pathname} to='/login'></Navigate>
 }
 
 export default PrivetRoutes

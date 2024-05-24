@@ -3,8 +3,10 @@ import profile from '../../assets/others/profile.png'
 import { useContext } from 'react'
 import { AuthContext } from '../../Provider/AuthProvider'
 import icon from '../../assets/icon/cart.png'
+import useCart from '../../hooks/useCart'
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
+    const [cart] = useCart();
     const handleLogOut = () => {
         return logOut()
 
@@ -16,9 +18,9 @@ const Navbar = () => {
         <NavLink to='/menu'><li>Our Menu</li></NavLink>
         <NavLink to='/order/drinks'><li>Order Food</li></NavLink>
         <li>
-            <NavLink to='/order/drinks'>
+            <NavLink to='/dashboard/cart'>
                 <img className='w-[62px]' src={icon} alt="" />
-                <div className="badge badge-secondary">+99</div>
+                <div className="badge badge-secondary">+{cart.length}</div>
             </NavLink>
         </li>
 
