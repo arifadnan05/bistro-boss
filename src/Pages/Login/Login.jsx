@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import loginImg from '../../assets/others/authentication1.png'
 import loginBg from '../../assets/others/authentication.png'
 
@@ -5,7 +7,8 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const { signInUser } = useContext(AuthContext)
@@ -84,7 +87,11 @@ const Login = () => {
                             <div className="form-control mt-6">
                                 <button disabled={disabled} className="btn btn-primary">Login</button>
                             </div>
+                            <p className="px-6 text-sm text-center dark:text-gray-600">Don't have an account yet?
+                                <Link to='/register' rel="noopener noreferrer" href="#" className="hover:underline text-violet-600"> Sign up</Link>
+                            </p>
                         </form>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

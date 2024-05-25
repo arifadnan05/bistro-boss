@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { Helmet } from 'react-helmet-async'
 import useAxiosPublic from '../../hooks/useAxiosPublic'
 import Swal from 'sweetalert2'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Register = () => {
     const navigate = useNavigate();
@@ -34,19 +34,19 @@ const Register = () => {
                 }
 
                 axiosPublic.post('/users', userInfo)
-                .then(res => {
-                    if(res.data.insertedId) {
-                        console.log('user added to the database')
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: `Registration success`,
-                            showConfirmButton: false,
-                            timer: 1500
-                          });
-                          navigate(location?.state ? location.state : '/')
-                    }
-                })
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log('user added to the database')
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: `Registration success`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate(location?.state ? location.state : '/')
+                        }
+                    })
             })
             .catch(error => {
                 console.error(error)
@@ -90,6 +90,9 @@ const Register = () => {
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Register</button>
                             </div>
+                            <p className="px-6 text-sm text-center dark:text-gray-600">Have an account yet?
+                                <Link to='/login' rel="noopener noreferrer" href="#" className="hover:underline text-violet-600"> Sign In</Link>.
+                            </p>
                         </form>
                     </div>
 
