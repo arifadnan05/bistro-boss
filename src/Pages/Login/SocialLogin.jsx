@@ -1,17 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SocialLogin = () => {
     const { googleLogin } = useContext(AuthContext)
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
 
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
-                console.log(result.user)
-                navigate(location?.state ? location.state : '/')
+
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data)
+                        navigate(location?.state ? location.state : '/')
+                    })
             })
             .catch(error => {
                 console.error(error)
